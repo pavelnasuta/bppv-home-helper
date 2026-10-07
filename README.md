@@ -34,7 +34,7 @@ python3 -m http.server 8080 --bind 127.0.0.1 --directory dist
 
 ## GitHub Pages
 
-Workflow `.github/workflows/pages.yml` собирает приложение и публикует `dist/` после push в `main`. В репозитории откройте **Settings → Pages** и выберите **GitHub Actions**. Сборка для Pages автоматически использует путь `/bppv-home-helper/`.
+Сейчас сайт публикуется из ветки `gh-pages`; production-сборка находится в её корне. Шаблон GitHub Actions хранится в `github-pages-workflow.yml`: после добавления ему разрешения `workflow` его нужно поместить в `.github/workflows/pages.yml`, чтобы публикация запускалась после каждого push в `main`. Сборка для Pages автоматически использует путь `/bppv-home-helper/`.
 
 ## Офлайн
 
