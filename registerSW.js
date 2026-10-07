@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/bppv-home-helper/sw.js', { scope: '/bppv-home-helper/' })})}
