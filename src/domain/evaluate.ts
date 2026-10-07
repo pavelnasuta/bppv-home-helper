@@ -47,7 +47,7 @@ export function evaluateEpisode(input: EvaluationInput): Assessment {
 }
 
 export function getProcedureEligibility(input: EvaluationInput, assessment = evaluateEpisode(input)) {
-  const reasons: string[] = []
+  const reasons: string[] = ['Пошаговый домашний манёвр закрыт до клинической проверки протокола.']
   if (assessment.safetyRoute !== 'no_reported_blockers') reasons.push('Текущий скрининг не разрешает домашнюю процедуру.')
   if (!input.preparation.adult || !input.preparation.helper || !input.preparation.safeSurface || !input.preparation.training) reasons.push('Не подтверждены возраст, помощник, безопасное место или обучение.')
   if (!input.instruction || !input.instruction.applicable || !input.instruction.trained) reasons.push('Нет применимой ранее показанной рекомендации специалиста.')

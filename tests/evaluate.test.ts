@@ -32,4 +32,19 @@ describe('safety-first assessment', () => {
     const assessment = evaluateEpisode({ ...safe, instruction: null, preparation: { ...safe.preparation, training: false } })
     expect(getProcedureEligibility({ ...safe, instruction: null, preparation: { ...safe.preparation, training: false } }, assessment).eligible).toBe(false)
   })
+
+  it('keeps home Epley unavailable while clinical review is pending even when all recorded prerequisites are met', () => {
+    const assessment = evaluateEpisode({
+      ...safe,
+      observations: [{ test: 'dix_hallpike', side: 'right', status: 'completed', vertigo: 'yes', eyeVisibility: 'adequate', nystagmus: 'observed', vertical: 'up', horizontal: 'none', torsion: 'patient_right', durationSeconds: 30 }],
+    })
+
+    const eligibility = getProcedureEligibility({
+      ...safe,
+      observations: [{ test: 'dix_hallpike', side: 'right', status: 'completed', vertigo: 'yes', eyeVisibility: 'adequate', nystagmus: 'observed', vertical: 'up', horizontal: 'none', torsion: 'patient_right', durationSeconds: 30 }],
+    }, assessment)
+
+    expect(eligibility.eligible).toBe(false)
+    expect(eligibility.reasons).toContain('Пошаговый домашний манёвр закрыт до клинической проверки протокола.')
+  })
 })
